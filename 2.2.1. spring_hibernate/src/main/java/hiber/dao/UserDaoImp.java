@@ -31,8 +31,8 @@ public class UserDaoImp implements UserDao {
 
    @Override
    public User getUserByCar(String model, int series) {
-      return (User) sessionFactory.getCurrentSession().createQuery("from User as user where user.car IN " +
-              "( from Car where (model = :model) AND (series = :series) ) ")
+      return (User) sessionFactory.getCurrentSession().createQuery("from User as user" +
+                      " where user.car.model = :model AND user.car.series = :series")
               .setParameter("model",model)
               .setParameter("series",series)
               .getResultList()
